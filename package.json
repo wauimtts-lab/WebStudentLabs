@@ -1,0 +1,12 @@
+{
+  "name": "lab-js-core",
+  "version": "1.0.0",
+  "description": "Лабораторная работа «Основы JavaScript: функции»",
+  "main": "core.js",
+  "scripts": {
+    "test": "mocha core.spec.js"
+  },
+  "devDependencies": {
+    "mocha": "^11.7.5"
+  }
+}
