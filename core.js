@@ -16,7 +16,7 @@
  * @returns {boolean}
  */
 function isInteger(n) {
-    // Ваш код
+    return Number.isInteger(n);
 }
 
 /**
@@ -28,7 +28,10 @@ function isInteger(n) {
  * @returns {number[]}
  */
 function even() {
-    // Ваш код
+    const result = []
+    for (let i = 2; i <= 20; i += 2){
+        result.push(i);}
+    return result;
 }
 
 /**
@@ -40,7 +43,13 @@ function even() {
  * @returns {number}
  */
 function sumTo(n) {
-    // Ваш код
+    let sum = 0;
+
+for (let i = 1; i <= n; i++) {
+    sum += i;
+}
+
+return sum;
 }
 
 /**
@@ -53,7 +62,11 @@ function sumTo(n) {
  * @returns {number}
  */
 function recSumTo(n) {
-    // Ваш код
+    if (n <= 0) {
+    return 0;
+}
+
+return n + recSumTo(n - 1);
 }
 
 /**
@@ -65,7 +78,17 @@ function recSumTo(n) {
  * @returns {number}
  */
 function factorial(n) {
-    // Ваш код
+    if (n === 0) {
+    return 1;
+}
+
+let result = 1;
+
+for (let i = 1; i <= n; i++) {
+    result *= i;
+}
+
+return result;
 }
 
 /**
@@ -78,7 +101,15 @@ function factorial(n) {
  * @returns {boolean}
  */
 function isBinary(n) {
-    // Ваш код
+    if (!Number.isSafeInteger(n) || n < 1) {
+    return false;
+}
+
+while (n % 2 === 0) {
+    n /= 2;
+}
+
+return n === 1;
 }
 
 /**
@@ -92,7 +123,19 @@ function isBinary(n) {
  * @returns {number}
  */
 function fibonacci(n) {
-    // Ваш код
+    if (n === 0) return 0;
+if (n === 1) return 1;
+
+let a = 0;
+let b = 1;
+
+for (let i = 2; i <= n; i++) {
+    const next = a + b;
+    a = b;
+    b = next;
+}
+
+return b;
 }
 
 /**
@@ -120,7 +163,17 @@ function fibonacci(n) {
  * @returns {Function}
  */
 function getOperationFn(initialValue, operatorFn) {
-    // Ваш код
+    let currentValue = initialValue;
+
+return function(newValue) {
+    if (typeof operatorFn !== 'function') {
+        return initialValue;
+    }
+
+    currentValue = operatorFn(currentValue, newValue);
+
+    return currentValue;
+};
 }
 
 /**
@@ -141,7 +194,18 @@ function getOperationFn(initialValue, operatorFn) {
  * @returns {Function}
  */
 function sequence(start, step) {
-    // Ваш код
+    if (start === undefined) start = 0;
+if (step === undefined) step = 1;
+
+let current = start;
+
+return function() {
+    const result = current;
+
+    current += step;
+
+    return result;
+};
 }
 
 /**
@@ -166,7 +230,41 @@ function sequence(start, step) {
  * @returns {boolean}
  */
 function deepEqual(firstObject, secondObject) {
-    // Ваш код
+    if (Object.is(firstObject, secondObject)) {
+    return true;
+}
+
+if (
+    typeof firstObject !== 'object' ||
+    firstObject === null ||
+    typeof secondObject !== 'object' ||
+    secondObject === null
+) {
+    return false;
+}
+
+if (Array.isArray(firstObject) !== Array.isArray(secondObject)) {
+    return false;
+}
+
+const firstKeys = Reflect.ownKeys(firstObject);
+const secondKeys = Reflect.ownKeys(secondObject);
+
+if (firstKeys.length !== secondKeys.length) {
+    return false;
+}
+
+for (const key of firstKeys) {
+    if (!Object.prototype.hasOwnProperty.call(secondObject, key)) {
+        return false;
+    }
+
+    if (!deepEqual(firstObject[key], secondObject[key])) {
+        return false;
+    }
+}
+
+return true;
 }
 
 module.exports = {
